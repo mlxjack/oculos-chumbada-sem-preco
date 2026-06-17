@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Óculos | Chumbada Oficial</title>
+    <style>
+        :root {
+            --primary: #ff4d00; /* Laranja desportivo */
+            --primary-hover: #e64500;
+            --bg-color: #f4f5f7;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --card-bg: #ffffff;
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header / Hero Section */
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 6px solid var(--primary);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.03) 10px,
+                rgba(255, 255, 255, 0.03) 20px
+            );
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            color: #b3b3b3;
+            font-size: 1.2em;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Barra de Pesquisa e Filtros */
+        .controls-container {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding: 0 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .search-bar {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px 25px;
+            font-size: 1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .search-bar:focus {
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(255, 77, 0, 0.15);
+        }
+
+        /* Grelha de Produtos */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto 60px;
+            padding: 0 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Cartão de Produto */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        .img-container {
+            width: 100%;
+            height: 260px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.1) rotate(-2deg);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--primary);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+
+        .card-content {
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .title {
+            font-size: 1.2em;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .price {
+            font-size: 1.6em;
+            color: var(--primary);
+            font-weight: 900;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .price span {
+            font-size: 0.5em;
+            color: var(--text-light);
+            font-weight: normal;
+            text-decoration: line-through;
+        }
+
+        .info {
+            font-size: 0.85em;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            margin-top: auto;
+            line-height: 1.5;
+        }
+
+        .info strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Container do SKU e Botão Copiar */
+        .sku-container {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sku {
+            font-size: 0.95em;
+            color: var(--text-dark);
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+
+        .copy-btn {
+            background-color: #f4f5f7;
+            border: 1px solid #dcdcdc;
+            color: var(--text-dark);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            background-color: #e2e2e2;
+        }
+
+        .copy-btn.copied {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        /* Mensagem de Sem Resultados */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: var(--text-light);
+            font-size: 1.2em;
+            display: none;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            header { padding: 40px 20px; }
+            .search-bar { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chumbada Oficial</h1>
+    <p>Performance e Estilo em Movimento</p>
+</header>
+
+<div class="controls-container">
+    <input type="text" id="searchInput" class="search-bar" placeholder="Pesquisar por modelo, cor ou SKU...">
+</div>
+
+<div class="container">
+    <div class="grid" id="productGrid">
+        <!-- O conteúdo será injetado pelo JavaScript -->
+    </div>
+    <div class="no-results" id="noResults">
+        Não foram encontrados óculos com esse termo. Tente outra pesquisa!
+    </div>
+</div>
+
+<script>
+    // Todos os dados processados do ficheiro CSV
+    const produtos = [
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Haste em Bambu; Cor da Armação: Preta; Cor da Lente: Roxa", "sku": "63100101", "img": "images/1OS-QAPLR.png", "tag": "Destaque"}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Haste em Bambu; Cor da Armação: Preto por fora e Azul por dentro; Cor da Lente: Preta", "sku": "63100110", "img": "images/10OS-QPALP.png", "tag": "Novo"}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Haste em Bambu; Cor da Armação:Plástico Preto; Cor da Lente: Roxa Degradê", "sku": "63100112", "img": "images/18OS-QAPLRD.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Haste em Plástico Translúcido; Cor da Armação: Fumê Claro; Cor da Lente: Azul", "sku": "63100115", "img": "images/15OS-QFMM-LMD.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "99,00", "color": "Dupla Lente Com Imã - Cor: Preta; Cor da Lente: Preta e Translúcida", "sku": "63100106", "img": "images/6OS-QAPLP-IM.png", "tag": "Magnético"}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Armação Superior Reta - Cor: Marrom; Cor da Lente: Marrom", "sku": "63100103", "img": "images/3OS-QAMLM.png", "tag": "Destaque"}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação: Preta; Cor da Lente: Preta", "sku": "63100102", "img": "images/2OS-QAPLP.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação: Preta e Vermelha; Cor da Lente: Cinza", "sku": "63100105", "img": "images/5OS-QPVLC.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação: Preto por Fora e Azul por Dentro; Cor da Lente: Verde", "sku": "63100109", "img": "images/9OS-QPALV.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação: Preta e Vermelha; Cor da Lente: Preta", "sku": "63100104", "img": "images/4OS-QPVLP.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação: Azul; Cor da Lente: Azul Degradê", "sku": "63100107", "img": "images/7OS-QAZLAD.png", "tag": "Novo"}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação Curvada: Marrom; Cor da Lente: Marrom", "sku": "63100108", "img": "images/8OS-QAMLM-2.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Armação Metálica com Plástico Cor: Preto por Fora e Azul por Dentro; Cor da Lente: Verde", "sku": "63100116", "img": "images/11OS-QPALV-2.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado Feminino", "price": "89,00", "color": "Apoio em silicone; Armação Feminina Cor: Metálica Marrom; Cor da Lente: Marrom Degradê", "sku": "63100111", "img": "images/15OS-QFMM-LMD.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado Aviador", "price": "89,00", "color": "Apoio em Silicone com Armação: Preta; Cor da Lente: Verde", "sku": "63100117", "img": "images/13OS-AAPLV.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado Aviador", "price": "89,00", "color": "Apoio em Silicone com Armação: Preta e Cinza; Cor da Lente: Verde", "sku": "63100118", "img": "images/19OS-APCLV.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Oval", "price": "89,00", "color": "Cor da Armação: Preta; Cor da Lente: Amarela Espelhada", "sku": "63100119", "img": "images/12OS-OAPLYE.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Oval", "price": "89,00", "color": "Cor da Armação em Plástico: Preto; Cor da Lente: Preta", "sku": "63100114", "img": "images/17OS-OAPLP.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Azul Espelhada", "sku": "63110051002", "img": "images/FLIP77C9.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Marrom", "sku": "63110051003", "img": "images/FLIP77C2.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Marrom Degrade", "sku": "63110051004", "img": "images/FLIP77C5.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Preta", "sku": "63110051005", "img": "images/FLIP77C3.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Preta Degradê", "sku": "63110051001", "img": "images/FLIP77C6.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Verde", "sku": "63110051007", "img": "images/FLIP77C1.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Verde Degradê", "sku": "63110051008", "img": "images/FLIP77C4.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Cinza Espelhada", "sku": "63110031009", "img": "images/FLIP55C8.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Marrom", "sku": "63110031003", "img": "images/FLIP55C2.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Marrom Degrade", "sku": "63110031004", "img": "images/FLIP55C5.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Preta", "sku": "63110031005", "img": "images/FLIP55C3.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Preta Degradê", "sku": "63110031001", "img": "images/FLIP55C6.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Verde", "sku": "63110031007", "img": "images/FLIP55C1.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Verde Degradê", "sku": "63110031008", "img": "images/FLIP55C4.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Marrom", "sku": "63110041003", "img": "images/FLIP22C2.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Preta Degradê", "sku": "63110041001", "img": "images/FLIP22C6.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Rosa Espelhada", "sku": "63110041006", "img": "images/FLIP22C7.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Verde", "sku": "63110041007", "img": "images/FLIP22C1.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Verde Degradê", "sku": "63110041008", "img": "images/FLIP22C4.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Preta", "sku": "63110041005", "img": "images/FLIP22C3.png", "tag": ""}
+    ];
+
+    const grid = document.getElementById('productGrid');
+    const searchInput = document.getElementById('searchInput');
+    const noResults = document.getElementById('noResults');
+
+    // Função de cópia do SKU usando execCommand (Suportado mesmo dentro de iFrames)
+    window.copySKU = function(sku, btnElement) {
+        if(!sku) return;
+        
+        // Cria um elemento temporário para cópia
+        const tempInput = document.createElement('textarea');
+        tempInput.value = sku;
+        document.body.appendChild(tempInput);
+        
+        // Seleciona o conteúdo (mesmo para mobile)
+        tempInput.select();
+        tempInput.setSelectionRange(0, 99999);
+        
+        try {
+            document.execCommand('copy');
+            
+            // Efeito visual de sucesso no botão
+            const originalHtml = btnElement.innerHTML;
+            btnElement.innerHTML = `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg> SKU Copiado!
+            `;
+            btnElement.classList.add('copied');
+            
+            setTimeout(() => {
+                btnElement.innerHTML = originalHtml;
+                btnElement.classList.remove('copied');
+            }, 2000);
+        } catch (err) {
+            console.error('Falha ao copiar SKU: ', err);
+        }
+        
+        // Remove o elemento temporário
+        document.body.removeChild(tempInput);
+    }
+
+    // Função para renderizar os produtos
+    function renderProducts(items) {
+        grid.innerHTML = ''; 
+        
+        if (items.length === 0) {
+            noResults.style.display = 'block';
+            return;
+        } else {
+            noResults.style.display = 'none';
+        }
+
+        items.forEach(prod => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            const badgeHtml = prod.tag ? `<div class="badge">${prod.tag}</div>` : '';
+
+            card.innerHTML = `
+                ${badgeHtml}
+                <div class="img-container">
+                    <img src="${prod.img}" alt="${prod.title} ${prod.model}" loading="lazy">
+                </div>
+                <div class="card-content">
+                    <div class="sku-container">
+                        <div class="sku">SKU: <strong>${prod.sku}</strong></div>
+                        <button class="copy-btn" onclick="copySKU('${prod.sku}', this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            Copiar SKU
+                        </button>
+                    </div>
+                    <div class="title">${prod.title} <br><small style="color:#ff4d00; font-size: 0.75em;">${prod.model}</small></div>
+                    
+                    <div class="info"><strong>Detalhes:</strong> ${prod.color}</div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // Renderiza todos os produtos inicialmente (filtrando produtos sem SKU ou imagem quebrada que possam estar no CSV original)
+    const validProducts = produtos.filter(p => p.sku);
+    renderProducts(validProducts);
+
+    // Sistema de Pesquisa/Filtro
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        
+        const filteredProducts = validProducts.filter(prod => {
+            return prod.title.toLowerCase().includes(searchTerm) ||
+                   prod.model.toLowerCase().includes(searchTerm) ||
+                   prod.color.toLowerCase().includes(searchTerm) ||
+                   prod.sku.toLowerCase().includes(searchTerm);
+        });
+        
+        renderProducts(filteredProducts);
+    });
+</script>
+
+</body>
+</html>
