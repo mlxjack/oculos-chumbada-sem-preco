@@ -277,6 +277,40 @@
             header { padding: 40px 20px; }
             .search-bar { width: 100%; }
         }
+        /* Deep-link: destaque de um produto vindo da busca do hub */
+        .focus-banner {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto 25px auto;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            background: var(--card-bg);
+            border: 1px solid #ffd9c2;
+            border-left: 5px solid var(--primary);
+            border-radius: var(--border-radius);
+            padding: 14px 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+        .focus-banner.on { display: flex; }
+        .focus-banner .fb-info { display: flex; align-items: center; gap: 12px; min-width: 0; }
+        .focus-banner .fb-info img {
+            width: 48px; height: 48px; object-fit: contain; flex: none;
+            background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 3px;
+        }
+        .focus-banner .fb-label {
+            display: block; font-size: 0.7em; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--primary);
+        }
+        .focus-banner .fb-name { font-weight: 700; color: var(--text-dark); }
+        .focus-banner button {
+            flex: none; cursor: pointer; font-family: inherit; font-size: 0.85em; font-weight: 700;
+            background: var(--primary); color: #fff; border: 0; border-radius: 999px; padding: 11px 18px;
+            transition: background 0.2s;
+        }
+        .focus-banner button:hover { background: var(--primary-hover); }
+        .card.focused { box-shadow: 0 0 0 3px var(--primary), 0 10px 30px rgba(0,0,0,0.12); }
     </style>
 </head>
 <body>
@@ -288,6 +322,11 @@
 
 <div class="controls-container">
     <input type="text" id="searchInput" class="search-bar" placeholder="Pesquisar por modelo, cor ou SKU...">
+</div>
+
+<div class="focus-banner" id="focusBanner">
+    <div class="fb-info" id="focusInfo"></div>
+    <button type="button" id="focusClear">Ver catálogo completo</button>
 </div>
 
 <div class="container">
@@ -397,6 +436,7 @@
         items.forEach(prod => {
             const card = document.createElement('div');
             card.className = 'card';
+            card.dataset.sku = prod.sku;
             
             const badgeHtml = prod.tag ? `<div class="badge">${prod.tag}</div>` : '';
 
@@ -429,8 +469,58 @@
     const validProducts = produtos.filter(p => p.sku);
     renderProducts(validProducts);
 
+    // ---- Deep-link: #/produto/:sku (usado pela busca global dos hubs) ----
+    const BASE_TITLE = document.title;
+    const focusBanner = document.getElementById('focusBanner');
+    const focusInfo = document.getElementById('focusInfo');
+    let focusedSku = '';
+
+    function clearFocus() {
+        if (!focusedSku) return;
+        focusedSku = '';
+        focusBanner.classList.remove('on');
+        document.title = BASE_TITLE;
+        // replaceState evita disparar hashchange e entrar em laço com o roteador
+        history.replaceState(null, '', location.pathname + location.search);
+    }
+
+    function routeFromHash() {
+        const m = (location.hash || '').match(/^#\/produto\/(.+)$/);
+        const sku = m ? decodeURIComponent(m[1]) : '';
+        const prod = validProducts.find(p => p.sku === sku);
+
+        if (!prod) {
+            focusedSku = '';
+            focusBanner.classList.remove('on');
+            document.title = BASE_TITLE;
+            renderProducts(validProducts);
+            return;
+        }
+
+        focusedSku = sku;
+        searchInput.value = '';
+        renderProducts([prod]);
+        const el = grid.querySelector('.card');
+        if (el) el.classList.add('focused');
+
+        focusInfo.innerHTML = '<img src="' + prod.img + '" alt="">'
+            + '<div><span class="fb-label">Resultado da busca</span>'
+            + '<span class="fb-name">' + prod.title + ' ' + prod.model + '</span></div>';
+        focusBanner.classList.add('on');
+        document.title = prod.title + ' ' + prod.model + ' | Chumbada Oficial';
+        grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    document.getElementById('focusClear').addEventListener('click', () => {
+        clearFocus();
+        renderProducts(validProducts);
+    });
+    window.addEventListener('hashchange', routeFromHash);
+    routeFromHash();
+
     // Sistema de Pesquisa/Filtro
     searchInput.addEventListener('input', (e) => {
+        clearFocus();
         const searchTerm = e.target.value.toLowerCase();
         
         const filteredProducts = validProducts.filter(prod => {
