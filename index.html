@@ -236,6 +236,15 @@
             text-transform: uppercase;
         }
 
+        .modelo {
+            margin-top: 3px;
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #444;
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+
         .copy-btn {
             background-color: #f4f5f7;
             border: 1px solid #dcdcdc;
@@ -366,44 +375,44 @@
 <script>
     // Todos os dados processados do ficheiro CSV
     const produtos = [
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Haste em Bambu; Cor da Armação: Preta; Cor da Lente: Roxa", "sku": "63100101", "img": "images/1OS-QAPLR.png", "tag": "Destaque"}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Haste em Bambu; Cor da Armação: Preto por fora e Azul por dentro; Cor da Lente: Preta", "sku": "63100110", "img": "images/10OS-QPALP.png", "tag": "Novo"}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Haste em Bambu; Cor da Armação:Plástico Preto; Cor da Lente: Roxa Degradê", "sku": "63100112", "img": "images/18OS-QAPLRD.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Haste em Plástico Translúcido; Cor da Armação: Fumê Claro; Cor da Lente: Azul", "sku": "63100115", "img": "images/15OS-QFMM-LMD.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "99,00", "color": "Dupla Lente Com Imã - Cor: Preta; Cor da Lente: Preta e Translúcida", "sku": "63100106", "img": "images/6OS-QAPLP-IM.png", "tag": "Magnético"}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Armação Superior Reta - Cor: Marrom; Cor da Lente: Marrom", "sku": "63100103", "img": "images/3OS-QAMLM.png", "tag": "Destaque"}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação: Preta; Cor da Lente: Preta", "sku": "63100102", "img": "images/2OS-QAPLP.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação: Preta e Vermelha; Cor da Lente: Cinza", "sku": "63100105", "img": "images/5OS-QPVLC.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação: Preto por Fora e Azul por Dentro; Cor da Lente: Verde", "sku": "63100109", "img": "images/9OS-QPALV.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação: Preta e Vermelha; Cor da Lente: Preta", "sku": "63100104", "img": "images/4OS-QPVLP.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação: Azul; Cor da Lente: Azul Degradê", "sku": "63100107", "img": "images/7OS-QAZLAD.png", "tag": "Novo"}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Cor da Armação Curvada: Marrom; Cor da Lente: Marrom", "sku": "63100108", "img": "images/8OS-QAMLM-2.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Quadrado", "price": "89,00", "color": "Armação Metálica com Plástico Cor: Preto por Fora e Azul por Dentro; Cor da Lente: Verde", "sku": "63100116", "img": "images/11OS-QPALV-2.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Quadrado Feminino", "price": "89,00", "color": "Apoio em silicone; Armação Feminina Cor: Metálica Marrom; Cor da Lente: Marrom Degradê", "sku": "63100111", "img": "images/15OS-QFMM-LMD.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Quadrado Aviador", "price": "89,00", "color": "Apoio em Silicone com Armação: Preta; Cor da Lente: Verde", "sku": "63100117", "img": "images/13OS-AAPLV.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Quadrado Aviador", "price": "89,00", "color": "Apoio em Silicone com Armação: Preta e Cinza; Cor da Lente: Verde", "sku": "63100118", "img": "images/19OS-APCLV.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Oval", "price": "89,00", "color": "Cor da Armação: Preta; Cor da Lente: Amarela Espelhada", "sku": "63100119", "img": "images/12OS-OAPLYE.png", "tag": ""}, 
-        {"title": "Oculos Solar", "model": "Oval", "price": "89,00", "color": "Cor da Armação em Plástico: Preto; Cor da Lente: Preta", "sku": "63100114", "img": "images/17OS-OAPLP.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Azul Espelhada", "sku": "63110051002", "img": "images/FLIP77C9.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Marrom", "sku": "63110051003", "img": "images/FLIP77C2.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Marrom Degrade", "sku": "63110051004", "img": "images/FLIP77C5.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Preta", "sku": "63110051005", "img": "images/FLIP77C3.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Preta Degradê", "sku": "63110051001", "img": "images/FLIP77C6.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Verde", "sku": "63110051007", "img": "images/FLIP77C1.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Aviador", "price": "34,99", "color": "Verde Degradê", "sku": "63110051008", "img": "images/FLIP77C4.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Cinza Espelhada", "sku": "63110031009", "img": "images/FLIP55C8.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Marrom", "sku": "63110031003", "img": "images/FLIP55C2.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Marrom Degrade", "sku": "63110031004", "img": "images/FLIP55C5.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Preta", "sku": "63110031005", "img": "images/FLIP55C3.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Preta Degradê", "sku": "63110031001", "img": "images/FLIP55C6.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Verde", "sku": "63110031007", "img": "images/FLIP55C1.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Quadrado", "price": "34,99", "color": "Verde Degradê", "sku": "63110031008", "img": "images/FLIP55C4.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Marrom", "sku": "63110041003", "img": "images/FLIP22C2.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Preta Degradê", "sku": "63110041001", "img": "images/FLIP22C6.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Rosa Espelhada", "sku": "63110041006", "img": "images/FLIP22C7.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Verde", "sku": "63110041007", "img": "images/FLIP22C1.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Verde Degradê", "sku": "63110041008", "img": "images/FLIP22C4.png", "tag": ""}, 
-        {"title": "Clip Flip", "model": "Redondo", "price": "34,99", "color": "Preta", "sku": "63110041005", "img": "images/FLIP22C3.png", "tag": ""}
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 1", "price": "89,00", "color": "Haste em Bambu; Cor da Armação: Preta; Cor da Lente: Roxa", "sku": "63100101", "img": "images/1OS-QAPLR.png", "tag": "Destaque"}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 2", "price": "89,00", "color": "Haste em Bambu; Cor da Armação: Preto por fora e Azul por dentro; Cor da Lente: Preta", "sku": "63100110", "img": "images/10OS-QPALP.png", "tag": "Novo"}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 3", "price": "89,00", "color": "Haste em Bambu; Cor da Armação:Plástico Preto; Cor da Lente: Roxa Degradê", "sku": "63100112", "img": "images/18OS-QAPLRD.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 4", "price": "89,00", "color": "Haste em Plástico Translúcido; Cor da Armação: Fumê Claro; Cor da Lente: Azul", "sku": "63100115", "img": "images/15OS-QFMM-LMD.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 5", "price": "99,00", "color": "Dupla Lente Com Imã - Cor: Preta; Cor da Lente: Preta e Translúcida", "sku": "63100106", "img": "images/6OS-QAPLP-IM.png", "tag": "Magnético"}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 6", "price": "89,00", "color": "Armação Superior Reta - Cor: Marrom; Cor da Lente: Marrom", "sku": "63100103", "img": "images/3OS-QAMLM.png", "tag": "Destaque"}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 7", "price": "89,00", "color": "Cor da Armação: Preta; Cor da Lente: Preta", "sku": "63100102", "img": "images/2OS-QAPLP.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 8", "price": "89,00", "color": "Cor da Armação: Preta e Vermelha; Cor da Lente: Cinza", "sku": "63100105", "img": "images/5OS-QPVLC.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 13", "price": "89,00", "color": "Cor da Armação: Preto por Fora e Azul por Dentro; Cor da Lente: Verde", "sku": "63100109", "img": "images/9OS-QPALV.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 10", "price": "89,00", "color": "Cor da Armação: Preta e Vermelha; Cor da Lente: Preta", "sku": "63100104", "img": "images/4OS-QPVLP.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 11", "price": "89,00", "color": "Cor da Armação: Azul; Cor da Lente: Azul Degradê", "sku": "63100107", "img": "images/7OS-QAZLAD.png", "tag": "Novo"}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 12", "price": "89,00", "color": "Cor da Armação Curvada: Marrom; Cor da Lente: Marrom", "sku": "63100108", "img": "images/8OS-QAMLM-2.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado", "modelo": "Modelo 9", "price": "89,00", "color": "Armação Metálica com Plástico Cor: Preto por Fora e Azul por Dentro; Cor da Lente: Verde", "sku": "63100116", "img": "images/11OS-QPALV-2.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado Feminino", "modelo": "Modelo 14", "price": "89,00", "color": "Apoio em silicone; Armação Feminina Cor: Metálica Marrom; Cor da Lente: Marrom Degradê", "sku": "63100111", "img": "images/15OS-QFMM-LMD.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado Aviador", "modelo": "Modelo 15", "price": "89,00", "color": "Apoio em Silicone com Armação: Preta; Cor da Lente: Verde", "sku": "63100117", "img": "images/13OS-AAPLV.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Quadrado Aviador", "modelo": "Modelo 16", "price": "89,00", "color": "Apoio em Silicone com Armação: Preta e Cinza; Cor da Lente: Verde", "sku": "63100118", "img": "images/19OS-APCLV.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Oval", "modelo": "Modelo 17", "price": "89,00", "color": "Cor da Armação: Preta; Cor da Lente: Amarela Espelhada", "sku": "63100119", "img": "images/12OS-OAPLYE.png", "tag": ""}, 
+        {"title": "Oculos Solar", "model": "Oval", "modelo": "Modelo 18", "price": "89,00", "color": "Cor da Armação em Plástico: Preto; Cor da Lente: Preta", "sku": "63100114", "img": "images/17OS-OAPLP.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "modelo": "Modelo Aviador", "price": "34,99", "color": "Azul Espelhada", "sku": "63110051002", "img": "images/FLIP77C9.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "modelo": "Modelo Aviador", "price": "34,99", "color": "Marrom", "sku": "63110051003", "img": "images/FLIP77C2.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "modelo": "Modelo Aviador", "price": "34,99", "color": "Marrom Degrade", "sku": "63110051004", "img": "images/FLIP77C5.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "modelo": "Modelo Aviador", "price": "34,99", "color": "Preta", "sku": "63110051005", "img": "images/FLIP77C3.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "modelo": "Modelo Aviador", "price": "34,99", "color": "Preta Degradê", "sku": "63110051001", "img": "images/FLIP77C6.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "modelo": "Modelo Aviador", "price": "34,99", "color": "Verde", "sku": "63110051007", "img": "images/FLIP77C1.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Aviador", "modelo": "Modelo Aviador", "price": "34,99", "color": "Verde Degradê", "sku": "63110051008", "img": "images/FLIP77C4.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "modelo": "Modelo Quadrado", "price": "34,99", "color": "Cinza Espelhada", "sku": "63110031009", "img": "images/FLIP55C8.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "modelo": "Modelo Quadrado", "price": "34,99", "color": "Marrom", "sku": "63110031003", "img": "images/FLIP55C2.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "modelo": "Modelo Quadrado", "price": "34,99", "color": "Marrom Degrade", "sku": "63110031004", "img": "images/FLIP55C5.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "modelo": "Modelo Quadrado", "price": "34,99", "color": "Preta", "sku": "63110031005", "img": "images/FLIP55C3.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "modelo": "Modelo Quadrado", "price": "34,99", "color": "Preta Degradê", "sku": "63110031001", "img": "images/FLIP55C6.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "modelo": "Modelo Quadrado", "price": "34,99", "color": "Verde", "sku": "63110031007", "img": "images/FLIP55C1.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Quadrado", "modelo": "Modelo Quadrado", "price": "34,99", "color": "Verde Degradê", "sku": "63110031008", "img": "images/FLIP55C4.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "modelo": "Modelo Redondo", "price": "34,99", "color": "Marrom", "sku": "63110041003", "img": "images/FLIP22C2.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "modelo": "Modelo Redondo", "price": "34,99", "color": "Preta Degradê", "sku": "63110041001", "img": "images/FLIP22C6.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "modelo": "Modelo Redondo", "price": "34,99", "color": "Rosa Espelhada", "sku": "63110041006", "img": "images/FLIP22C7.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "modelo": "Modelo Redondo", "price": "34,99", "color": "Verde", "sku": "63110041007", "img": "images/FLIP22C1.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "modelo": "Modelo Redondo", "price": "34,99", "color": "Verde Degradê", "sku": "63110041008", "img": "images/FLIP22C4.png", "tag": ""}, 
+        {"title": "Clip Flip", "model": "Redondo", "modelo": "Modelo Redondo", "price": "34,99", "color": "Preta", "sku": "63110041005", "img": "images/FLIP22C3.png", "tag": ""}
     ];
 
     const grid = document.getElementById('productGrid');
@@ -472,7 +481,10 @@
                 </div>
                 <div class="card-content">
                     <div class="sku-container">
-                        <div class="sku">SKU: <strong>${prod.sku}</strong></div>
+                        <div class="sku-info">
+                            <div class="sku">SKU: <strong>${prod.sku}</strong></div>
+                            ${prod.modelo ? `<div class="modelo">${prod.modelo}</div>` : ''}
+                        </div>
                         <button class="copy-btn" onclick="copySKU('${prod.sku}', this)">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -564,6 +576,7 @@
         const filteredProducts = validProducts.filter(prod => {
             return prod.title.toLowerCase().includes(searchTerm) ||
                    prod.model.toLowerCase().includes(searchTerm) ||
+                   (prod.modelo || '').toLowerCase().includes(searchTerm) ||
                    prod.color.toLowerCase().includes(searchTerm) ||
                    prod.sku.toLowerCase().includes(searchTerm);
         });
