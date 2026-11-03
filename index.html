@@ -347,6 +347,7 @@
     <script src="https://selecao.chumbada.com.br/client.js" defer></script>
   <meta name="robots" content="noindex, nofollow">
   <script src="./black-november/bn.js"></script>
+  <script src="./shell/chn.js" defer data-variant="sem-preco" data-current="oculos"></script>
 </head>
 <body>
 
@@ -354,10 +355,6 @@
     <h1>Chumbada Oficial</h1>
     <p>Performance e Estilo em Movimento</p>
 </header>
-
-<div class="controls-container">
-    <input type="text" id="searchInput" class="search-bar" placeholder="Pesquisar por modelo, cor ou SKU...">
-</div>
 
 <div class="focus-banner" id="focusBanner">
     <div class="fb-info" id="focusInfo"></div>
@@ -418,7 +415,6 @@
     ];
 
     const grid = document.getElementById('productGrid');
-    const searchInput = document.getElementById('searchInput');
     const noResults = document.getElementById('noResults');
 
     // Função de cópia do SKU usando execCommand (Suportado mesmo dentro de iFrames)
@@ -550,7 +546,6 @@
         }
 
         focusedSku = sku;
-        searchInput.value = '';
         renderProducts([prod]);
         const el = grid.querySelector('.card');
         if (el) el.classList.add('focused');
@@ -570,21 +565,6 @@
     window.addEventListener('hashchange', routeFromHash);
     routeFromHash();
 
-    // Sistema de Pesquisa/Filtro
-    searchInput.addEventListener('input', (e) => {
-        clearFocus();
-        const searchTerm = e.target.value.toLowerCase();
-        
-        const filteredProducts = validProducts.filter(prod => {
-            return prod.title.toLowerCase().includes(searchTerm) ||
-                   prod.model.toLowerCase().includes(searchTerm) ||
-                   (prod.modelo || '').toLowerCase().includes(searchTerm) ||
-                   prod.color.toLowerCase().includes(searchTerm) ||
-                   prod.sku.toLowerCase().includes(searchTerm);
-        });
-        
-        renderProducts(filteredProducts);
-    });
 </script>
 
 </body>
